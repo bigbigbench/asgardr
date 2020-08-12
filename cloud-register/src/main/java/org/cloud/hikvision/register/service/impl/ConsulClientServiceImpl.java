@@ -8,17 +8,17 @@ import java.util.Optional;
 import org.cloud.hikvision.register.service.BaseService;
 import org.cloud.hikvision.register.service.ConsulClientService;
 
-import com.orbitz.consul.AgentClient;
-import com.orbitz.consul.HealthClient;
-import com.orbitz.consul.KeyValueClient;
-import com.orbitz.consul.StatusClient;
-import com.orbitz.consul.cache.KVCache;
-import com.orbitz.consul.cache.ServiceHealthCache;
-import com.orbitz.consul.cache.ServiceHealthKey;
-import com.orbitz.consul.model.agent.ImmutableRegistration;
-import com.orbitz.consul.model.agent.Registration;
-import com.orbitz.consul.model.health.ServiceHealth;
-import com.orbitz.consul.model.kv.Value;
+//import com.orbitz.consul.AgentClient;
+//import com.orbitz.consul.HealthClient;
+//import com.orbitz.consul.KeyValueClient;
+//import com.orbitz.consul.StatusClient;
+//import com.orbitz.consul.cache.KVCache;
+//import com.orbitz.consul.cache.ServiceHealthCache;
+//import com.orbitz.consul.cache.ServiceHealthKey;
+//import com.orbitz.consul.model.agent.ImmutableRegistration;
+//import com.orbitz.consul.model.agent.Registration;
+//import com.orbitz.consul.model.health.ServiceHealth;
+//import com.orbitz.consul.model.kv.Value;
 
 public class ConsulClientServiceImpl extends BaseService implements ConsulClientService {
 
