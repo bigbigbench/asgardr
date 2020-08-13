@@ -1,7 +1,6 @@
 package org.cloud.hikvision.common.annotation;
 
 import org.cloud.hikvision.common.annotation.FruitColor.Color;
-import org.junit.jupiter.api.Test;
 
 public class Apple {
 
@@ -18,7 +17,6 @@ public class Apple {
 		return appleName;
 	}
 
-	@Test
 	public void setAppleName(String appleName) {
 		this.appleName = appleName;
 	}

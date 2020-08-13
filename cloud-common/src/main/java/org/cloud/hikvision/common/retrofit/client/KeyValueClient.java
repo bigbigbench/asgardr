@@ -1,7 +1,6 @@
 package org.cloud.hikvision.common.retrofit.client;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +19,7 @@ import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
 public class KeyValueClient {
@@ -77,13 +77,13 @@ public class KeyValueClient {
 	 * 
 	 * @param key
 	 * @param value
-	 * @param map
+	 * @param cas
 	 * @return
 	 */
-	public boolean putValue(String key, String value, Map<String,Object> map) {
+	public boolean putValueCas(String key, String value, Integer cas) {
 		API api = retrofit.create(API.class);
 		RequestBody body = RequestBody.create(MediaType.parse("utf-8"), value);
-		Call<Boolean> call = api.putValue(key, body, map);
+		Call<Boolean> call = api.putValueCas(key,cas,body);
 		try {
 			Response<Boolean> response = call.execute();
 			return response.body();
@@ -110,24 +110,56 @@ public class KeyValueClient {
 
 	interface API {
 
+		/**
+		 * 获取key对应的value值的string模式
+		 * @param key
+		 * @return
+		 */
 		@GET("kv/{key}")
 		Call<String> getValueAsString(@Path("key") String key);
 
+		/**
+		 * 获取value结构体
+		 * @param key
+		 * @param query
+		 * @return
+		 */
 		@GET("kv/{key}")
 		Call<List<String>> getKeys(@Path("key") String key
 				, @QueryMap Map<String, Object> query);
 
+		/**
+		 * 设置value值
+		 * @param key
+		 * @param data
+		 * @return
+		 */
 		@PUT("kv/{key}")
 		Call<Boolean> putValue(@Path("key") String key
 				, @Body RequestBody data);
-
+		
+		/**
+		 * 通过cas设置value值,暂未实现
+		 * @param query
+		 * @return
+		 */
 		@PUT("kv/{key}")
-		Call<Boolean> putValue(@Path("key") String key
-				, @Body RequestBody data
-				, @QueryMap Map<String, Object> query);
+		Call<Boolean> putValueCas(@Path("key") String key
+				, @Query("cas") int modifyIndex
+				, @Body RequestBody data);
 
+		/**
+		 * 删除value值
+		 * @param key
+		 * @return
+		 */
 		@DELETE("kv/{key}")
 		Call<Void> deleteValues(@Path("key") String key);
+	}
+	
+	public static void main(String[] args) {
+		KeyValueClient kv = new KeyValueClient("http://localhost:8500/v1/");
+		System.out.println(kv.putValueCas("my-key", "this is key 1237", 1237));
 	}
 
 }

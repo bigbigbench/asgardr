@@ -16,11 +16,11 @@ import retrofit2.http.GET;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
-public class KeyValueClient {
+public class KeyValueClientTest {
 
 	private Retrofit retrofit;
 
-	public KeyValueClient(String baseUrl) {
+	public KeyValueClientTest(String baseUrl) {
 		retrofit = new Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(ScalarsConverterFactory.create())
 				// 增加返回值为Gson的支持
 				.addConverterFactory(GsonConverterFactory.create()).build();
